@@ -11,11 +11,12 @@ const ModelsAnalysis = ({ analysisData , setModelResults}) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
   // const [modelResults, setModelResults] = useState('');
 
   useEffect(() => {
     if (!analysisData.columns || analysisData.columns.length === 0) {
-      navigate('/');
+      // navigate('/');
       return;
     }
     // Filter out non-numeric columns, as they can't be used in these models
@@ -49,6 +50,7 @@ const ModelsAnalysis = ({ analysisData , setModelResults}) => {
   const runAnalysis = async () => {
     setIsLoading(true);
     setError('');
+    setIsSuccess(false);
     setModelResults('');
 
     try {
@@ -65,6 +67,7 @@ const ModelsAnalysis = ({ analysisData , setModelResults}) => {
       const result = await response.json();
       if (!response.ok) throw new Error(result.error);
       setModelResults(result.model_summary);
+      setIsSuccess(true)
       console.log(result.model_summary);
       
       
@@ -150,6 +153,16 @@ const ModelsAnalysis = ({ analysisData , setModelResults}) => {
                 </pre>
             </div>
         )}
+
+
+            {/* --- ADDED SUCCESS MESSAGE --- */}
+        {isSuccess && (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-xl mb-6">
+            <p className="font-semibold">Analysis completed successfully!</p>
+            <p className="text-sm">The model results are displayed below.</p>
+          </div>
+        )}
+        
 
         {/* Navigation */}
         <div className="flex justify-between items-center pt-12">

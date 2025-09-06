@@ -14,7 +14,7 @@ const StabilityTests = ({ analysisData }) => {
 
   useEffect(() => {
     if (!analysisData.fullDataset || analysisData.fullDataset.length === 0) {
-      navigate('/');
+      // navigate('/');
       return;
     }
     // Filter for numeric columns suitable for these tests

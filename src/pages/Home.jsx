@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../../config.js';
 
 // A dedicated component to display data quality warnings after upload.
 const UploadWarnings = ({ issues }) => {
@@ -65,7 +66,7 @@ const Home = ({ setAnalysisData }) => {
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:5000/api/data/upload', {
+      const response = await fetch(`${API_BASE_URL}/api/data/upload`, {
         method: 'POST',
         body: formData,
       });

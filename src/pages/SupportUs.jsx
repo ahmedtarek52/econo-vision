@@ -23,10 +23,12 @@ const SupportUs = () => {
     <div className="space-y-8">
       <div className="bg-white/95 backdrop-blur-lg rounded-3xl p-12 shadow-2xl border border-white/30">
         <h2 className="text-4xl font-bold text-center mb-6 bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">
-          ❤️ ادعمنا لنستمر
+           Support us to continue❤️
         </h2>
-        <p className="text-center text-xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed" dir="rtl">
-          نحن نسعى جاهدين لتوفير أفضل الأدوات التحليلية لدعم الباحثين والخبراء الاقتصاديين. دعمك المادي يساعدنا على تغطية تكاليف التشغيل، وتطوير ميزات جديدة، والحفاظ على هذه المنصة متاحة ومجانية. كل مساهمة، مهما كانت صغيرة، تحدث فرقاً كبيراً.
+        <p className="text-center text-xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed">
+          We strive to provide the best analytical tools to support researchers and economists.
+           Your financial support helps us cover operating costs, develop new features, and keep this platform available and free.
+           Every contribution, no matter how small, makes a big difference.
         </p>
 
         {/* Thank You Message */}

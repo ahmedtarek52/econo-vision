@@ -18,8 +18,12 @@ const DataPreparation = ({ analysisData, setAnalysisData }) => {
   }, [analysisData.fullDataset, navigate]);
 
   const cleaningOptions = [
-    { id: 'remove-missing', title: '🚫 Remove Missing Values', description: 'Deletes rows with any missing data.' },
-    { id: 'remove-duplicates', title: '🗃️ Remove Duplicates', description: 'Deletes identical rows.' },
+    { id: 'remove-missing', title: '🚫 Remove Missing Values', description: 'Automatically remove rows with missing values.' },
+    { id: 'impute-missing', title: '🔄 Impute Missing Values', description: 'Replace empty cells in numeric columns with the column\'s average.' },
+    { id: 'handle-outliers', title: '📉 Handle Outliers', description: 'Detect and remove or cap extreme values.' },
+    { id: 'unify-formats', title: '📝 Unify Formats', description: 'Ensure consistent formatting for dates and text.' },
+    { id: 'remove-duplicates', title: '🗃️ Remove Duplicates', description: 'Identify and remove duplicate rows for data integrity.' },
+    { id: 'normalize-data', title: '⚖️ Normalize Data', description: 'Rescale numerical data to a standard range for better model performance.' }
   ];
 
   const applyCleaningOption = async (optionId) => {
@@ -80,7 +84,7 @@ const DataPreparation = ({ analysisData, setAnalysisData }) => {
   };
 
   const nextPage = () => {
-    setAnalysisData(prev => ({ ...prev, fullDataset: processedData }));
+    // setAnalysisData(prev => ({ ...prev, fullDataset: processedData }));
     navigate('/dashboard');
   };
 
