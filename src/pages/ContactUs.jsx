@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../../config.js';
+
 
 const ContactUs = () => {
   const [rating, setRating] = useState(0);
@@ -20,7 +22,7 @@ const ContactUs = () => {
     setSubmitted(false);
 
     try {
-      const response = await fetch('http://localhost:5000/api/contact/submit', {
+      const response = await fetch(`${API_BASE_URL}/api/contact/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../../config.js';
+
 
 const ModelsAnalysis = ({ analysisData , setModelResults}) => {
   const navigate = useNavigate();
@@ -54,7 +56,7 @@ const ModelsAnalysis = ({ analysisData , setModelResults}) => {
     setModelResults('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/model/run-model', {
+      const response = await fetch(`${API_BASE_URL}/api/model/run-model`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

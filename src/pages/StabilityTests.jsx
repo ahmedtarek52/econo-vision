@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../../config.js';
+
 
 const StabilityTests = ({ analysisData }) => {
   const navigate = useNavigate();
@@ -44,7 +46,7 @@ const StabilityTests = ({ analysisData }) => {
     setTestResults({ formatted_results: '', interpretation: '' });
 
     try {
-      const response = await fetch('http://localhost:5000/api/tests/run-test', {
+      const response = await fetch(`${API_BASE_URL}/api/tests/run-test`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

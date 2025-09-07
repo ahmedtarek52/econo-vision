@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../../config.js';
+
 
 const AIReports = ({ modelResults }) => {
   const [englishReport, setEnglishReport] = useState('');
@@ -19,7 +21,7 @@ const AIReports = ({ modelResults }) => {
     setArabicReport('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/report/generate-report', {
+      const response = await fetch(`${API_BASE_URL}/api/report/generate-report`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ modelSummary: modelResults }),

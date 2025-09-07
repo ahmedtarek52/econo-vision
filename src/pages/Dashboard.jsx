@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../../config.js';
+
 
 const Dashboard = ({ analysisData }) => {
   const navigate = useNavigate();
@@ -44,7 +46,7 @@ const Dashboard = ({ analysisData }) => {
     }
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/dashboard/summary', {
+      const response = await fetch(`${API_BASE_URL}/api/dashboard/summary`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ dataset: analysisData.fullDataset }),

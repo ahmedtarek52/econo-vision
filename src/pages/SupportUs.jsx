@@ -35,7 +35,7 @@ const SupportUs = () => {
         {showThankYou && (
           <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-8 mb-12 text-center animate-fade-in">
             <div className="text-6xl mb-4">🙏</div>
-            <h3 className="text-2xl font-bold text-green-800 mb-2">شكراً لدعمكم!</h3>
+            <h3 className="text-2xl font-bold text-green-800 mb-2">Thank you for your support!</h3>
             <p className="text-green-700 text-lg">Your support means the world to us and helps keep this platform free for everyone.</p>
           </div>
         )}
