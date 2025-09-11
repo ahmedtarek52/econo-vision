@@ -157,14 +157,14 @@ const DataPreparation = ({ analysisData, setAnalysisData }) => {
         </div>
 
         <div className="flex justify-between items-center mt-12">
-          <button onClick={() => navigate('/')} className="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-lg hover:bg-gray-300 transition-all">
+          <button onClick={() => navigate('/')} className="bg-gray-200 text-gray-800 text-sm md:text-lg font-bold py-1 px-2 md:py-3 md:px-6 me-3 md:me-0 hover:bg-gray-300 transition-all">
             ← Back to Upload
           </button>
           <div className="flex items-center gap-4">
-            <button onClick={downloadCleanedData} className="bg-green-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-600 transition-all">
+            <button onClick={downloadCleanedData} className="bg-green-500 text-white text-sm md:text-lg font-bold py-1 px-2 md:py-3 md:px-6 rounded-lg hover:bg-green-600 transition-all">
               📥 Download Cleaned Data
             </button>
-            <button onClick={nextPage} className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-lg font-bold py-3 px-6 rounded-lg transform transition-all duration-300 shadow-lg hover:-translate-y-1">
+            <button onClick={nextPage} className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm md:text-lg font-bold py-1 px-2 md:py-3 md:px-6 rounded-lg transform transition-all duration-300 shadow-lg hover:-translate-y-1">
               Next: Dashboard →
             </button>
           </div>

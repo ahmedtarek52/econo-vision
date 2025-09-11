@@ -168,7 +168,7 @@ const ModelsAnalysis = ({ analysisData , setModelResults}) => {
 
         {/* Navigation */}
         <div className="flex justify-between items-center pt-12">
-          <button onClick={() => navigate('/stability-tests')} className="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-lg">
+          <button onClick={() => navigate('/stability-tests')} className="bg-gray-200 text-gray-800 font-bold py-3 px-6 me-3 md:me-0 rounded-lg">
             ← Back to Tests
           </button>
           <button onClick={() => navigate('/ai-reports')} className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg">

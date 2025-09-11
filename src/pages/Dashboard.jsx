@@ -177,7 +177,7 @@ const Dashboard = ({ analysisData }) => {
         </div>
 
         <div className="flex justify-between items-center pt-8">
-          <button onClick={() => navigate('/data-preparation')} className="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-lg hover:bg-gray-300">
+          <button onClick={() => navigate('/data-preparation')} className="bg-gray-200 text-gray-800 font-bold py-3 px-6 me-3 md:me-0 rounded-lg hover:bg-gray-300">
             ← Back to Preparation
           </button>
           <button onClick={() => navigate('/stability-tests')} className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg">

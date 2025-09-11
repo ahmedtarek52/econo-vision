@@ -134,7 +134,7 @@ const ContactUs = () => {
             <div className="space-y-6">
               <div className="bg-blue-50 rounded-2xl p-6 border">
                 <h4 className="text-lg font-bold text-blue-900">Email</h4>
-                <p className="text-lg font-semibold text-blue-800">mohamed.fawzy.0999@gmail.com</p>
+                <p className="text-sm md:text-lg font-semibold text-blue-800">mohamed.fawzy.0999@gmail.com</p>
               </div>
               <div className="bg-green-50 rounded-2xl p-6 border">
                 <h4 className="text-lg font-bold text-green-900">Phone</h4>
@@ -145,7 +145,7 @@ const ContactUs = () => {
         </div>
 
         <div className="flex justify-between items-center pt-12 mt-8 border-t">
-          <button onClick={() => navigate('/ai-reports')} className="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-lg">
+          <button onClick={() => navigate('/ai-reports')} className="bg-gray-200 text-gray-800 font-bold py-3 px-6 me-3 md:me-0 rounded-lg">
             ← Back to Reports
           </button>
           <button onClick={() => navigate('/support-us')} className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg">

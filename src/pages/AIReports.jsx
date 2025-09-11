@@ -100,7 +100,7 @@ const AIReports = ({ modelResults }) => {
         )}
 
         <div className="flex justify-between items-center pt-12 mt-8 border-t">
-          <button onClick={() => navigate('/models-analysis')} className="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-lg">← Back to Models</button>
+          <button onClick={() => navigate('/models-analysis')} className="bg-gray-200 text-gray-800 font-bold py-3 px-6 me-3 md:me-0 rounded-lg">← Back to Models</button>
           <button onClick={() => navigate('/contact-us')} className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg">Next: Contact Us →</button>
         </div>
       </div>
