@@ -43,15 +43,15 @@ const SupportUs = () => {
         {/* Impact Statistics */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
           <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-6 rounded-2xl text-center shadow-lg transform hover:-translate-y-1 transition-all">
-            <div className="text-3xl font-bold mb-2">2,500+</div>
+            <div className="text-3xl font-bold mb-2">500+</div>
             <div className="text-blue-100">Active Users</div>
           </div>
           <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-6 rounded-2xl text-center shadow-lg transform hover:-translate-y-1 transition-all">
-            <div className="text-3xl font-bold mb-2">15,000+</div>
+            <div className="text-3xl font-bold mb-2">1,000+</div>
             <div className="text-green-100">Reports Generated</div>
           </div>
           <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-6 rounded-2xl text-center shadow-lg transform hover:-translate-y-1 transition-all">
-            <div className="text-3xl font-bold mb-2">50+</div>
+            <div className="text-3xl font-bold mb-2">5+</div>
             <div className="text-purple-100">Countries Served</div>
           </div>
           <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-6 rounded-2xl text-center shadow-lg transform hover:-translate-y-1 transition-all">

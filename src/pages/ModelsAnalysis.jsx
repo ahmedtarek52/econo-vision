@@ -140,7 +140,11 @@ const ModelsAnalysis = ({ analysisData , setModelResults}) => {
         </div>
         
         <div className="text-center mb-8">
-            <button onClick={runAnalysis} disabled={isLoading} className="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-lg font-bold py-4 px-12 rounded-xl hover:from-green-600 disabled:opacity-50">
+            <button onClick={runAnalysis} disabled={isLoading} className="bg-gradient-to-r from-green-500 to-emerald-600 
+    text-white text-lg font-bold py-4 px-12 rounded-xl
+    shadow-md transition-all duration-300
+    hover:from-green-600 hover:to-emerald-700 hover:shadow-xl hover:scale-105
+    disabled:opacity-50 disabled:hover:scale-100 disabled:hover:shadow-md">
                 {isLoading ? 'Running...' : 'Run Analysis'}
             </button>
         </div>

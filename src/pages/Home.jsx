@@ -118,7 +118,7 @@ const Home = ({ setAnalysisData }) => {
         <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
         <div className="relative z-10">
           <h1 className="text-5xl font-bold text-white mb-4 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
-            🏛️ Fawzy's Econometrics Platform
+            🏛️ DataNomics
           </h1>
         </div>
       </div>
@@ -170,6 +170,8 @@ const Home = ({ setAnalysisData }) => {
                 <div className="text-8xl mb-6 text-indigo-500">📊</div>
                 <h4 className="text-2xl font-semibold mb-4">Drag & Drop Your File Here</h4>
                 <p className="text-lg text-gray-600">Supported formats: CSV, Excel (.xlsx, .xls), JSON</p>
+                <p className="text-muted">Please make sure your data file name is written in English. 💡</p>
+
               </div>
 
               <input
