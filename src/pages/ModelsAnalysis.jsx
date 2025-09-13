@@ -10,11 +10,12 @@ const ModelsAnalysis = ({ analysisData , setModelResults}) => {
   const [endogenousVariables, setEndogenousVariables] = useState([]);
   const [exogenousVariables, setExogenousVariables] = useState([]);
   const [selectedModelId, setSelectedModelId] = useState('ols');
+  const [selectedVariables, setSelectedVariables] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
-  // const [modelResults, setModelResults] = useState('');
+  const [modelResult, setLocalModelResults] = useState('');
 
   useEffect(() => {
     if (!analysisData.columns || analysisData.columns.length === 0) {
@@ -71,6 +72,7 @@ const ModelsAnalysis = ({ analysisData , setModelResults}) => {
       setModelResults(result.model_summary);
       setIsSuccess(true)
       console.log(result.model_summary);
+      setLocalModelResults(result.model_summary);
       
       
     } catch (err) {
@@ -80,27 +82,56 @@ const ModelsAnalysis = ({ analysisData , setModelResults}) => {
     }
   };
 
-  const VariableCard = ({ variable, onClick }) => (
-    <div
-      className="bg-blue-100 border border-blue-200 rounded-lg px-3 py-1 cursor-pointer hover:bg-blue-200 text-center font-medium text-blue-800"
-      onClick={onClick}
-    >
-      {variable}
-    </div>
-  );
 
-  const DropZone = ({ title, variables, targetGroup }) => (
-    <div className="bg-white rounded-xl p-4 shadow-md border flex-1">
-      <h4 className="text-lg font-semibold mb-3 text-center text-gray-700">{title}</h4>
-      <div className="flex flex-wrap justify-center gap-2 min-h-24 p-2 border-2 border-dashed rounded-lg bg-gray-50">
-        {variables.length > 0 ? (
-          variables.map(v => <VariableCard key={v} variable={v} onClick={() => moveVariable(v, 'available')} />)
-        ) : (
-          <p className="text-gray-400 self-center">Drop variables here</p>
-        )}
-      </div>
-    </div>
+
+const VariableCard = ({ variable, onClick, isSelected }) => (
+  <div
+    className={`bg-blue-100 border rounded-lg px-3 py-1 cursor-pointer text-center font-medium text-blue-800 
+      ${isSelected ? 'border-indigo-500 ring-2 ring-indigo-300' : 'border-blue-200 hover:bg-blue-200'}`}
+    onClick={onClick}
+  >
+    {variable}
+  </div>
+);
+
+  const toggleSelectVariable = (variable) => {
+  setSelectedVariables((prev) =>
+    prev.includes(variable)
+      ? prev.filter((v) => v !== variable) // deselect
+      : [...prev, variable] // select
   );
+};
+
+// Move selected variables
+const moveSelectedVariables = (targetGroup) => {
+  selectedVariables.forEach((v) => moveVariable(v, targetGroup));
+  setSelectedVariables([]); // clear selection after moving
+};
+
+// In DropZone (for available vars only)
+const DropZone = ({ title, variables, targetGroup }) => (
+  <div className="bg-white rounded-xl p-4 shadow-md border flex-1">
+    <h4 className="text-lg font-semibold mb-3 text-center text-gray-700">{title}</h4>
+    <div className="flex flex-wrap justify-center gap-2 min-h-24 p-2 border-2 border-dashed rounded-lg bg-gray-50">
+      {variables.length > 0 ? (
+        variables.map(v => (
+          <VariableCard
+            key={v}
+            variable={v}
+            isSelected={selectedVariables.includes(v)}
+            onClick={() =>
+              targetGroup === 'available'
+                ? toggleSelectVariable(v)
+                : moveVariable(v, 'available')
+            }
+          />
+        ))
+      ) : (
+        <p className="text-gray-400 self-center">Drop variables here</p>
+      )}
+    </div>
+  </div>
+);
 
   return (
     <div className="space-y-8">
@@ -108,74 +139,132 @@ const ModelsAnalysis = ({ analysisData , setModelResults}) => {
         <h2 className="text-4xl font-bold text-center mb-6 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
           📈 Economic Models & Analysis
         </h2>
-        
+
+        {/* --- ADDED DATA PREVIEW SECTION --- */}
+        {isSuccess && (
+          <div className="mb-8">
+            <div className="bg-gray-50 rounded-2xl p-8 shadow-inner border">
+              <h3 className="text-2xl font-bold mb-6 text-gray-800 text-center">
+                AnalysisData ModelResults
+              </h3>
+              <div className="bg-white border rounded-xl p-6 max-h-96 overflow-y-auto">
+                <pre className="whitespace-pre-wrap font-mono text-sm text-gray-800">
+                  {modelResult}
+                </pre>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Variable Selection */}
         <div className="flex flex-col lg:flex-row gap-6 mb-8">
-          <DropZone title="Available Variables" variables={getAvailableVariables()} targetGroup="available" />
+          <DropZone
+            title="Available Variables"
+            variables={getAvailableVariables()}
+            targetGroup="available"
+          />
           <div className="flex flex-col gap-2 self-center">
-            <button onClick={() => getAvailableVariables().forEach(v => moveVariable(v, 'endogenous'))} className="p-2 bg-gray-200 rounded-md hover:bg-gray-300">{'>>'}</button>
-            <button onClick={() => getAvailableVariables().forEach(v => moveVariable(v, 'exogenous'))} className="p-2 bg-gray-200 rounded-md hover:bg-gray-300">{'>'}</button>
+            <button
+              onClick={() => moveSelectedVariables("endogenous")}
+              className="p-2 bg-gray-200 rounded-md hover:bg-gray-300"
+            >
+              {" "}
+              {">>"}
+            </button>
+            <button
+              onClick={() => moveSelectedVariables("exogenous")}
+              className="p-2 bg-gray-200 rounded-md hover:bg-gray-300"
+            >
+              {" "}
+              {">"}
+            </button>
           </div>
-          <DropZone title="Endogenous (Dependent)" variables={endogenousVariables} targetGroup="endogenous" />
-          <DropZone title="Exogenous (Independent)" variables={exogenousVariables} targetGroup="exogenous" />
+          <DropZone
+            title="Endogenous (Dependent)"
+            variables={endogenousVariables}
+            targetGroup="endogenous"
+          />
+          <DropZone
+            title="Exogenous (Independent)"
+            variables={exogenousVariables}
+            targetGroup="exogenous"
+          />
         </div>
 
         {/* Model Selection */}
         <div className="mb-8">
-          <h3 className="text-2xl font-semibold text-center mb-6 text-gray-800">Choose Your Model</h3>
+          <h3 className="text-2xl font-semibold text-center mb-6 text-gray-800">
+            Choose Your Model
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {models.map((model) => (
               <div
                 key={model.id}
                 className={`border-2 rounded-xl p-6 cursor-pointer transition-all ${
-                  selectedModelId === model.id ? 'border-indigo-500 bg-indigo-50' : 'bg-white hover:bg-gray-50'
+                  selectedModelId === model.id
+                    ? "border-indigo-500 bg-indigo-50"
+                    : "bg-white hover:bg-gray-50"
                 }`}
                 onClick={() => setSelectedModelId(model.id)}
               >
-                <h4 className="text-lg font-bold text-gray-800">{model.title}</h4>
+                <h4 className="text-lg font-bold text-gray-800">
+                  {model.title}
+                </h4>
                 <p className="text-sm text-gray-600">{model.description}</p>
               </div>
             ))}
           </div>
         </div>
-        
+
         <div className="text-center mb-8">
-            <button onClick={runAnalysis} disabled={isLoading} className="bg-gradient-to-r from-green-500 to-emerald-600 
+          <button
+            onClick={runAnalysis}
+            disabled={isLoading}
+            className="bg-gradient-to-r from-green-500 to-emerald-600 
     text-white text-lg font-bold py-4 px-12 rounded-xl
     shadow-md transition-all duration-300
     hover:from-green-600 hover:to-emerald-700 hover:shadow-xl hover:scale-105
-    disabled:opacity-50 disabled:hover:scale-100 disabled:hover:shadow-md">
-                {isLoading ? 'Running...' : 'Run Analysis'}
-            </button>
+    disabled:opacity-50 disabled:hover:scale-100 disabled:hover:shadow-md"
+          >
+            {isLoading ? "Running..." : "Run Analysis"}
+          </button>
         </div>
 
         {/* Results */}
-        {error && <p className="text-red-500 bg-red-100 p-3 rounded-md mb-4">{error}</p>}
+        {error && (
+          <p className="text-red-500 bg-red-100 p-3 rounded-md mb-4">{error}</p>
+        )}
         {analysisData.modelResults && (
-            <div className="bg-gray-50 rounded-2xl p-8 shadow-inner border">
-                <h3 className="text-2xl font-bold mb-4 text-gray-800">Model Results</h3>
-                <pre className="bg-white border rounded-xl p-6 font-mono text-sm whitespace-pre-wrap overflow-x-auto">
-                    {analysisData.modelResults}
-                </pre>
-            </div>
+          <div className="bg-gray-50 rounded-2xl p-8 shadow-inner border">
+            <h3 className="text-2xl font-bold mb-4 text-gray-800">
+              Model Results
+            </h3>
+            <pre className="bg-white border rounded-xl p-6 font-mono text-sm whitespace-pre-wrap overflow-x-auto">
+              {analysisData.modelResults}
+            </pre>
+          </div>
         )}
 
-
-            {/* --- ADDED SUCCESS MESSAGE --- */}
+        {/* --- ADDED SUCCESS MESSAGE --- */}
         {isSuccess && (
           <div className="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-xl mb-6">
             <p className="font-semibold">Analysis completed successfully!</p>
             <p className="text-sm">The model results are displayed below.</p>
           </div>
         )}
-        
 
         {/* Navigation */}
         <div className="flex justify-between items-center pt-12">
-          <button onClick={() => navigate('/stability-tests')} className="bg-gray-200 text-gray-800 font-bold py-3 px-6 me-3 md:me-0 rounded-lg">
+          <button
+            onClick={() => navigate("/stability-tests")}
+            className="bg-gray-200 text-gray-800 font-bold py-3 px-6 me-3 md:me-0 rounded-lg"
+          >
             ← Back to Tests
           </button>
-          <button onClick={() => navigate('/ai-reports')} className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg">
+          <button
+            onClick={() => navigate("/ai-reports")}
+            className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg"
+          >
             Next: AI Reports →
           </button>
         </div>

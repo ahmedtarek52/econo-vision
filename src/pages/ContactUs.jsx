@@ -132,16 +132,58 @@ const ContactUs = () => {
           <div>
             <h3 className="text-2xl font-bold mb-6 text-gray-800">Get In Touch Directly</h3>
             <div className="space-y-6">
+              {/* Email */}
               <div className="bg-blue-50 rounded-2xl p-6 border">
                 <h4 className="text-lg font-bold text-blue-900">Email</h4>
-                <p className="text-sm md:text-lg font-semibold text-blue-800">mohamed.fawzy.0999@gmail.com</p>
+                <p className="text-sm md:text-lg font-semibold text-blue-800">
+                  mohamed.fawzy.0999@gmail.com
+                </p>
               </div>
+
+              {/* Phone */}
               <div className="bg-green-50 rounded-2xl p-6 border">
                 <h4 className="text-lg font-bold text-green-900">Phone</h4>
                 <p className="text-lg font-semibold text-green-800">+201111500461</p>
               </div>
             </div>
+
+            {/* Social Media */}
+            <div className="flex gap-6 mt-8 text-2xl text-gray-600">
+              <a
+                href="https://facebook.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-600"
+              >
+                <i className="fab fa-facebook"></i>
+              </a>
+              <a
+                href="https://twitter.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-sky-500"
+              >
+                <i className="fab fa-x"></i>
+              </a>
+              <a
+                href="https://instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-pink-500"
+              >
+                <i className="fab fa-instagram"></i>
+              </a>
+              <a
+                href="https://linkedin.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-blue-700"
+              >
+                <i className="fab fa-linkedin"></i>
+              </a>
+            </div>
           </div>
+
         </div>
 
         <div className="flex justify-between items-center pt-12 mt-8 border-t">

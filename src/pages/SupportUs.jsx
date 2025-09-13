@@ -1,23 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../../config.js';
 
 const SupportUs = () => {
-  const [selectedAmount, setSelectedAmount] = useState('');
-  const [customAmount, setCustomAmount] = useState('');
-  const [showThankYou, setShowThankYou] = useState(false);
   const navigate = useNavigate();
+  const [count, setCount] = useState(1000); // fallback value
 
-  const predefinedAmounts = [
-    { value: '50', label: '$50', description: 'Coffee for the team' },
-    { value: '100', label: '$100', description: 'Support development' },
-    { value: '250', label: '$250', description: 'Help us grow' },
-    { value: '500', label: '$500', description: 'Major contribution' }
-  ];
+  useEffect(() => {
+    axios.get(`${API_BASE_URL}/api/report/report-count`)
+      .then((res) => setCount(res.data.count))
+      .catch(() => setCount(1000)); // fallback if backend doesn’t respond
+  }, []);
 
-  const handleDonation = (method) => {
-    setShowThankYou(true);
-    setTimeout(() => setShowThankYou(false), 5000);
-  };
+  
 
   return (
     <div className="space-y-8">
@@ -31,14 +27,6 @@ const SupportUs = () => {
            Every contribution, no matter how small, makes a big difference.
         </p>
 
-        {/* Thank You Message */}
-        {showThankYou && (
-          <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-8 mb-12 text-center animate-fade-in">
-            <div className="text-6xl mb-4">🙏</div>
-            <h3 className="text-2xl font-bold text-green-800 mb-2">Thank you for your support!</h3>
-            <p className="text-green-700 text-lg">Your support means the world to us and helps keep this platform free for everyone.</p>
-          </div>
-        )}
 
         {/* Impact Statistics */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
@@ -47,7 +35,7 @@ const SupportUs = () => {
             <div className="text-blue-100">Active Users</div>
           </div>
           <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-6 rounded-2xl text-center shadow-lg transform hover:-translate-y-1 transition-all">
-            <div className="text-3xl font-bold mb-2">1,000+</div>
+            <div className="text-3xl font-bold mb-2">{count.toLocaleString()}+</div>
             <div className="text-green-100">Reports Generated</div>
           </div>
           <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-6 rounded-2xl text-center shadow-lg transform hover:-translate-y-1 transition-all">
