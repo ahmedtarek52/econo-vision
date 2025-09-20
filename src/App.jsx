@@ -36,7 +36,7 @@ function App() {
             <Route path="/" element={<Home setAnalysisData={setAnalysisData} />} />
             <Route path="/data-preparation" element={<DataPreparation analysisData={analysisData} />} />
              <Route path="/dashboard" element={<Dashboard analysisData={analysisData} />} />
-           <Route path="/stability-tests" element={<StabilityTests analysisData={analysisData} />} />
+             <Route path="/stability-tests" element={<DiagnosticsTests analysisData={analysisData} />} />
           <Route path="/models-analysis" element={<ModelsAnalysis analysisData={analysisData}  setModelResults={setModelResults} />} />
              <Route path="/ai-reports" element={<AIReports modelResults={modelResults} />} />
             <Route path="/contact-us" element={<ContactUs />} />
