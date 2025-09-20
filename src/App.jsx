@@ -5,7 +5,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import DataPreparation from './pages/DataPreparation';
 import Dashboard from './pages/Dashboard';
-import DiagnosticsTests from './pages/DiagnosticsTests'; // أو أيًا كان اسم ملفك الجديدimport ModelsAnalysis from './pages/ModelsAnalysis';
+import DiagnosticsTests from './pages/DiagnosticsTests';
 import AIReports from './pages/AIReports';
 import ContactUs from './pages/ContactUs';
 import SupportUs from './pages/SupportUs';
