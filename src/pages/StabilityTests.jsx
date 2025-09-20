@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// (جديد) مكون صغير لعرض النتائج بشكل منظم
+// مكون صغير لعرض النتائج بشكل منظم
 const RenderResults = ({ testId, results }) => {
   if (!results) return null;
 
@@ -72,7 +72,7 @@ const DiagnosticsTests = ({ analysisData }) => {
   // حالة واحدة لتخزين جميع أنواع النتائج
   const [testResults, setTestResults] = useState(null);
 
-  // (جديد) قائمة بجميع الاختبارات القبلية
+  // قائمة بجميع الاختبارات القبلية
   const tests = [
     { id: 'stationarity', title: 'Stationarity Test (ADF)', description: 'Checks if each series has a unit root. Essential for all time-series models.' },
     { id: 'vif', title: 'Multicollinearity Test (VIF)', description: 'Measures correlation between independent variables. Crucial for OLS and ARDL.' },
@@ -94,7 +94,6 @@ const DiagnosticsTests = ({ analysisData }) => {
         body: JSON.stringify({
           dataset: analysisData.fullDataset,
           testId: testId,
-          // إرسال المتغيرات المستقلة دائماً، سيستخدمها اختبار VIF
           independent_vars: analysisData.independentVars
         }),
       });
