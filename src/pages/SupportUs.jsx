@@ -7,11 +7,29 @@ const SupportUs = () => {
   const navigate = useNavigate();
   const [count, setCount] = useState(1000); // fallback value
 
-  useEffect(() => {
-    axios.get(`${API_BASE_URL}/api/report/report-count`)
-      .then((res) => setCount(res.data.count))
-      .catch(() => setCount(1000)); // fallback if backend doesn’t respond
-  }, []);
+useEffect(() => {
+  const fetchReportCount = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/report/report-count`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error);
+
+      setCount(result.count); // ✅ Always the latest count from backend
+      console.log(result.count);
+      
+    } catch (err) {
+      console.error('Failed to fetch report count:', err.message);
+      setCount(1000); // fallback
+    }
+  };
+
+  fetchReportCount();
+}, []);
+
 
   
 
